@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今天吃什麼？決定抽籤器</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+        .result-box {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff6b6b;
+            min-height: 4rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px dashed #ffe3e3;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            background-color: #fffafb;
+            transition: all 0.3s ease;
+        }
+        button {
+            background-color: #4facfe;
+            background-image: linear-gradient(130deg, #00f2fe 0%, #4facfe 100%);
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+            transition: transform 0.1s, box-shadow 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(79, 172, 254, 0.6);
+        }
+        button:active {
+            transform: translateY(1px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>今天吃什麼？</h1>
+        <div class="result-box" id="result">點擊下方按鈕開始</div>
+        <button onclick="getRandomFood()">幫我決定！</button>
+    </div>
+
+    <script>
+        // 這裡可以自由修改或增加你的美食清單喔！
+        const foodList = [
+            "便當 🍱", "滷肉飯 🍚", "牛肉麵 🍜", "義大利麵 🍝", 
+            "火鍋 🍲", "壽司 🍣", "麥當勞 🍔", "炸雞 🍗", 
+            "水餃 🥟", "手搖飲 + 雞排 🥤", "便利商店 🏪", "咖哩飯 🍛"
+        ];
+
+        function getRandomFood() {
+            const resultBox = document.getElementById('result');
+            let count = 0;
+            
+            // 做一個跑馬燈的動態效果
+            const interval = setInterval(() => {
+                const randomIndex = Math.floor(Math.random() * foodList.length);
+                resultBox.innerText = foodList[randomIndex];
+                count++;
+                
+                // 跑 10 次之後停止，定格在最後的結果
+                if (count > 10) {
+                    clearInterval(interval);
+                    resultBox.style.transform = "scale(1.1)";
+                    setTimeout(() => {
+                        resultBox.style.transform = "scale(1)";
+                    }, 200);
+                }
+            }, 80);
+        }
+    </script>
+
+</body>
+</html>
